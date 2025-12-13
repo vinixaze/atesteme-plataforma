@@ -4,7 +4,7 @@ Plataforma de aprendizado digital com sistema de gamificação, níveis e compet
 
 ## 🚀 Acesso à Demonstração
 
-**URL:** [https://atesteme-plataforma.vercel.app](https://atesteme-plataforma.vercel.app)
+**URL:** [https://atesteme-plataforma.vercel.app](https://atesteme-plataforma.vercel.app/)
 
 ### Credenciais de Acesso
 
