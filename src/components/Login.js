@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff, AlertCircle } from 'lucide-react';
+import { authenticateUser, saveCurrentUser, DEMO_USERS } from '../utils/auth';
 import '../styles/Login.css';
 
 function Login({ onLogin }) {
@@ -16,31 +17,59 @@ function Login({ onLogin }) {
     confirmPassword: ''
   });
 
-  const DEMO_CREDENTIALS = {
-    email: 'demo@atesteme.com',
-    password: 'demo123'
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setError('');
 
     if (!isSignup) {
-      if (formData.email === DEMO_CREDENTIALS.email && formData.password === DEMO_CREDENTIALS.password) {
-        onLogin();
+      const user = authenticateUser(formData.email, formData.password);
+      
+      if (user) {
+        saveCurrentUser(user);
+        onLogin(user);
       } else {
-        setError('E-mail ou senha incorretos. Use: demo@atesteme.com / demo123');
+        setError('E-mail/CPF ou senha incorretos. Verifique as credenciais disponíveis abaixo.');
       }
     } else {
-      if (formData.password !== formData.confirmPassword) {
-        setError('As senhas não coincidem');
+      if (!formData.fullName.trim()) {
+        setError('Por favor, preencha o nome completo');
+        return;
+      }
+      if (!formData.username.trim()) {
+        setError('Por favor, preencha o nome de usuário');
+        return;
+      }
+      if (!formData.email.trim()) {
+        setError('Por favor, preencha o e-mail');
+        return;
+      }
+      if (!formData.birthDate.trim()) {
+        setError('Por favor, preencha a data de nascimento');
+        return;
+      }
+      if (!formData.cpf.trim()) {
+        setError('Por favor, preencha o CPF');
         return;
       }
       if (formData.password.length < 8) {
         setError('A senha deve ter no mínimo 8 caracteres');
         return;
       }
-      onLogin();
+      if (formData.password !== formData.confirmPassword) {
+        setError('As senhas não coincidem. Por favor, digite a mesma senha nos dois campos.');
+        return;
+      }
+
+      const newUser = {
+        id: Date.now(),
+        name: formData.fullName,
+        email: formData.email,
+        password: formData.password,
+        cpf: formData.cpf
+      };
+      
+      saveCurrentUser(newUser);
+      onLogin(newUser);
     }
   };
 
@@ -52,11 +81,12 @@ function Login({ onLogin }) {
     setError('');
   };
 
-  const fillDemoCredentials = () => {
+  const fillDemoCredentials = (userIndex = 0) => {
+    const user = DEMO_USERS[userIndex];
     setFormData({
       ...formData,
-      email: DEMO_CREDENTIALS.email,
-      password: DEMO_CREDENTIALS.password
+      email: user.email,
+      password: user.password
     });
     setError('');
   };
@@ -84,14 +114,25 @@ function Login({ onLogin }) {
             )}
 
             <div className="demo-credentials">
-              <p>Credenciais de demonstração:</p>
-              <div className="credentials-box">
-                <strong>E-mail:</strong> demo@atesteme.com<br />
-                <strong>Senha:</strong> demo123
-              </div>
-              <button type="button" onClick={fillDemoCredentials} className="btn-demo">
-                Preencher automaticamente
-              </button>
+              <p>Credenciais disponíveis para demonstração:</p>
+              
+              {DEMO_USERS.map((user, index) => (
+                <div key={user.id} className="credentials-box">
+                  <div className="credentials-info">
+                    <strong>{user.name}</strong><br />
+                    <span>E-mail: {user.email}</span><br />
+                    <span>CPF: {user.cpf}</span><br />
+                    <span>Senha: {user.password}</span>
+                  </div>
+                  <button 
+                    type="button" 
+                    onClick={() => fillDemoCredentials(index)} 
+                    className="btn-demo"
+                  >
+                    Usar estas credenciais
+                  </button>
+                </div>
+              ))}
             </div>
             
             <div className="form-group">
@@ -148,6 +189,15 @@ function Login({ onLogin }) {
                 onClick={() => {
                   setIsSignup(false);
                   setError('');
+                  setFormData({
+                    email: '',
+                    password: '',
+                    fullName: '',
+                    username: '',
+                    birthDate: '',
+                    cpf: '',
+                    confirmPassword: ''
+                  });
                 }}
               >
                 ✕
@@ -168,6 +218,7 @@ function Login({ onLogin }) {
                 name="fullName"
                 value={formData.fullName}
                 onChange={handleChange}
+                placeholder="Ex: Maria Silva"
                 required
               />
             </div>
@@ -179,6 +230,7 @@ function Login({ onLogin }) {
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
+                placeholder="Ex: mariasilva"
                 required
               />
             </div>
@@ -190,6 +242,7 @@ function Login({ onLogin }) {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
+                placeholder="Ex: maria@email.com"
                 required
               />
             </div>
@@ -226,6 +279,7 @@ function Login({ onLogin }) {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
+                  placeholder="Mínimo 8 caracteres"
                   required
                 />
                 <button
@@ -247,6 +301,7 @@ function Login({ onLogin }) {
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
+                  placeholder="Digite a mesma senha"
                   required
                 />
                 <button
@@ -257,6 +312,9 @@ function Login({ onLogin }) {
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
               </div>
+              {formData.password && formData.confirmPassword && formData.password !== formData.confirmPassword && (
+                <small className="password-mismatch">As senhas não coincidem</small>
+              )}
             </div>
 
             <button type="submit" className="btn-primary">CADASTRAR</button>

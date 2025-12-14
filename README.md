@@ -8,19 +8,35 @@ Plataforma de aprendizado digital com sistema de gamificação, níveis e compet
 
 ### Credenciais de Acesso
 
+**Usuário 1:**
 - **E-mail:** demo@atesteme.com
+- **CPF:** 123.456.789-00
 - **Senha:** demo123
+
+**Usuário 2:**
+- **E-mail:** maria@atesteme.com
+- **CPF:** 987.654.321-00
+- **Senha:** maria123
+
+**Usuário 3:**
+- **E-mail:** joao@atesteme.com
+- **CPF:** 456.789.123-00
+- **Senha:** joao123
+
+Você pode usar e-mail ou CPF para fazer login.
 
 ## 🎯 Funcionalidades
 
-- Sistema de login com autenticação
-- Dashboard do usuário
+- Sistema de login com autenticação por e-mail ou CPF
+- Validação de senhas no cadastro
+- Dashboard personalizado por usuário
 - Trilha de aprendizado estilo Duolingo
 - 3 níveis de progressão
 - 16 competências por nível
 - Sistema de conquistas e medalhas
 - Interface responsiva (mobile, tablet, desktop)
 - Gamificação completa
+- Menu de usuário com logout
 
 ## 💻 Tecnologias
 
@@ -29,6 +45,7 @@ Plataforma de aprendizado digital com sistema de gamificação, níveis e compet
 - Lucide React (ícones)
 - CSS Modules
 - Create React App
+- Session Storage para autenticação
 
 ## 📱 Responsividade
 
@@ -61,3 +78,7 @@ npm start
 ```bash
 npm run build
 ```
+
+## 👤 Autor
+
+Desenvolvido para demonstração da nova versão da plataforma educacional.

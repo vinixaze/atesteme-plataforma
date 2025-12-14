@@ -6,21 +6,27 @@ import Medals from './Medals';
 import { userData } from '../data/userData';
 import '../styles/Dashboard.css';
 
-function Dashboard() {
+function Dashboard({ user, onLogout }) {
   const [activeTab, setActiveTab] = useState('learning');
+
+  const userDataWithName = {
+    ...userData,
+    name: user?.name || userData.name,
+    email: user?.email || userData.email
+  };
 
   return (
     <div className="dashboard">
-      <Header user={userData} />
+      <Header user={userDataWithName} onLogout={onLogout} />
       
       <div className="dashboard-container">
         <div className="profile-header">
           <div className="profile-avatar">
-            <span>{userData.name.charAt(0)}</span>
+            <span>{userDataWithName.name.charAt(0).toUpperCase()}</span>
           </div>
           <div className="profile-info">
-            <h1>{userData.name}</h1>
-            <p className="profile-level">Nível {userData.currentLevel} - {userData.levels[userData.currentLevel - 1].name}</p>
+            <h1>{userDataWithName.name}</h1>
+            <p className="profile-level">Nível {userDataWithName.currentLevel} - {userDataWithName.levels[userDataWithName.currentLevel - 1].name}</p>
           </div>
         </div>
 
@@ -48,15 +54,15 @@ function Dashboard() {
         <div className="tab-content">
           {activeTab === 'learning' && (
             <LearningPath 
-              competencesData={userData.competencesData}
-              currentLevel={userData.currentLevel}
+              competencesData={userDataWithName.competencesData}
+              currentLevel={userDataWithName.currentLevel}
             />
           )}
           {activeTab === 'progress' && (
-            <ProgressPath levels={userData.levels} />
+            <ProgressPath levels={userDataWithName.levels} />
           )}
           {activeTab === 'medals' && (
-            <Medals medals={userData.medals} />
+            <Medals medals={userDataWithName.medals} />
           )}
         </div>
       </div>

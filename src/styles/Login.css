@@ -224,3 +224,31 @@ font-size: 1rem;
     padding: 0.75rem;
   }
 }
+.credentials-box {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  border: 1px solid #E0E0E0;
+}
+
+.credentials-info {
+  font-size: 0.85rem;
+  color: #333;
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.credentials-info strong {
+  color: #7B1FA2;
+  font-size: 0.95rem;
+}
+
+.credentials-info span {
+  color: #555;
+}
+
+.password-mismatch {
+  color: #C62828 !important;
+  font-weight: 600;
+}

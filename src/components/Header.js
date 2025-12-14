@@ -1,11 +1,13 @@
-import React from 'react';
-import { User, Bell, Menu } from 'lucide-react';
+import React, { useState } from 'react';
+import { User, Bell, Menu, LogOut } from 'lucide-react';
 
-function Header({ user, onMenuClick }) {
+function Header({ user, onLogout }) {
+  const [showUserMenu, setShowUserMenu] = useState(false);
+
   return (
     <header style={styles.header}>
       <div style={styles.container}>
-        <button style={styles.menuButton} onClick={onMenuClick}>
+        <button style={styles.menuButton}>
           <Menu size={24} />
         </button>
         <div style={styles.logo}>
@@ -17,9 +19,26 @@ function Header({ user, onMenuClick }) {
             <Bell size={20} />
             <span style={styles.badge}>3</span>
           </button>
-          <button style={styles.iconButton}>
-            <User size={20} />
-          </button>
+          <div style={styles.userMenuContainer}>
+            <button 
+              style={styles.iconButton}
+              onClick={() => setShowUserMenu(!showUserMenu)}
+            >
+              <User size={20} />
+            </button>
+            {showUserMenu && (
+              <div style={styles.userMenu}>
+                <div style={styles.userInfo}>
+                  <strong>{user?.name}</strong>
+                  <span>{user?.email}</span>
+                </div>
+                <button style={styles.logoutButton} onClick={onLogout}>
+                  <LogOut size={16} />
+                  Sair
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </header>
@@ -92,6 +111,42 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     fontWeight: 'bold'
+  },
+  userMenuContainer: {
+    position: 'relative'
+  },
+  userMenu: {
+    position: 'absolute',
+    top: '100%',
+    right: 0,
+    marginTop: '0.5rem',
+    background: 'white',
+    borderRadius: '12px',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+    minWidth: '220px',
+    overflow: 'hidden',
+    zIndex: 1000
+  },
+  userInfo: {
+    padding: '1rem',
+    borderBottom: '1px solid #E0E0E0',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.25rem'
+  },
+  logoutButton: {
+    width: '100%',
+    padding: '0.875rem 1rem',
+    border: 'none',
+    background: 'none',
+    color: '#C62828',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    fontSize: '0.95rem',
+    fontWeight: '500',
+    transition: 'background 0.2s'
   }
 };
 
