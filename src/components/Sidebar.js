@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { X, Home, BookOpen, Award, Trophy, FileText, HelpCircle } from 'lucide-react';
 import '../styles/Sidebar.css';
 
@@ -11,6 +11,36 @@ function Sidebar({ isOpen, onClose }) {
     { icon: FileText, label: 'Relatórios' },
     { icon: HelpCircle, label: 'Suporte' }
   ];
+
+  useEffect(() => {
+    let timeoutId;
+
+    const handleMouseMove = (e) => {
+      if (e.clientX <= 20 && !isOpen) {
+        timeoutId = setTimeout(() => {
+          document.dispatchEvent(new CustomEvent('openSidebar'));
+        }, 100);
+      } else if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+
+    const handleOpenSidebar = () => {
+      if (!isOpen) {
+        const openEvent = new CustomEvent('triggerSidebarOpen');
+        document.dispatchEvent(openEvent);
+      }
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('openSidebar', handleOpenSidebar);
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('openSidebar', handleOpenSidebar);
+    };
+  }, [isOpen]);
 
   return (
     <>

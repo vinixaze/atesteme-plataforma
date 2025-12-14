@@ -1,8 +1,8 @@
 .learning-path {
   width: 100%;
-  max-width: 700px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 0 0.5rem;
+  padding: 0;
 }
 
 .path-header {
@@ -28,25 +28,27 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1rem;
-  padding: 2rem 0;
-  min-height: 800px;
+  padding: 2rem 1rem;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .competence-wrapper {
   position: relative;
   width: 100%;
-  min-height: 120px;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .path-connector {
-  position: absolute;
   width: 4px;
   height: 60px;
   border-radius: 2px;
-  top: -60px;
-  left: 50%;
-  transform: translateX(-50%);
+  margin: 0 auto;
   z-index: 1;
 }
 
@@ -55,14 +57,14 @@
   display: flex;
   align-items: center;
   gap: 1.25rem;
-  padding: 1.25rem;
+  padding: 1.5rem;
   border-radius: 16px;
   background: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: all 0.3s;
   z-index: 2;
-  max-width: 400px;
-  width: calc(100% - 40px);
+  width: 100%;
+  max-width: 700px;
 }
 
 .competence-node.completed {
@@ -96,8 +98,8 @@
 }
 
 .competence-circle {
-  width: 64px;
-  height: 64px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -110,8 +112,8 @@
 }
 
 .competence-icon {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   color: white;
 }
 
@@ -124,20 +126,20 @@
 .competence-content {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.5rem;
   flex: 1;
   min-width: 0;
 }
 
 .competence-category {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .competence-title {
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: #333;
   font-weight: 600;
   line-height: 1.3;
@@ -164,16 +166,17 @@
 }
 
 .start-button {
-  padding: 0.6rem 1.25rem;
+  padding: 0.7rem 1.5rem;
   border: none;
   border-radius: 8px;
   background: linear-gradient(135deg, #7B1FA2, #9C27B0);
   color: white;
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.3s;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .start-button:hover {
@@ -187,6 +190,9 @@
   padding: 1.5rem;
   background: #F9F9F9;
   border-radius: 12px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .legend h3 {
@@ -229,8 +235,11 @@
 }
 
 @media (max-width: 768px) {
-  .learning-path {
-    padding: 0;
+  .path-scroll {
+    padding: 1rem 0.5rem;
+  }
+
+  .competence-wrapper {
     max-width: 100%;
   }
 
@@ -247,32 +256,20 @@
     font-size: 1rem;
   }
 
-  .path-scroll {
-    padding: 1rem 0;
-    min-height: auto;
-  }
-
-  .competence-wrapper {
-    min-height: auto;
-  }
-
   .competence-node {
     max-width: 100%;
-    width: calc(100% - 20px);
-    padding: 1rem;
+    padding: 1.25rem;
     gap: 1rem;
-    margin-left: 0 !important;
-    margin-right: auto;
   }
 
   .competence-circle {
-    width: 56px;
-    height: 56px;
+    width: 64px;
+    height: 64px;
   }
 
   .competence-icon {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
   }
 
   .competence-number {
@@ -280,16 +277,16 @@
   }
 
   .competence-category {
-    font-size: 0.65rem;
+    font-size: 0.7rem;
   }
 
   .competence-title {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   .start-button {
-    padding: 0.5rem 1rem;
-    font-size: 0.85rem;
+    padding: 0.6rem 1.25rem;
+    font-size: 0.9rem;
   }
 
   .legend {
@@ -320,27 +317,26 @@
   }
 
   .competence-node {
-    padding: 0.875rem;
+    padding: 1rem;
     gap: 0.875rem;
-    width: 100%;
   }
 
   .competence-circle {
-    width: 50px;
-    height: 50px;
+    width: 56px;
+    height: 56px;
   }
 
   .competence-category {
-    font-size: 0.6rem;
+    font-size: 0.65rem;
   }
 
   .competence-title {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
   }
 
   .start-button {
-    padding: 0.5rem 0.75rem;
-    font-size: 0.8rem;
+    padding: 0.55rem 1rem;
+    font-size: 0.85rem;
   }
 
   .legend {
@@ -350,17 +346,4 @@
   .legend h3 {
     font-size: 1rem;
   }
-}
-path-scroll {
-  max-width: 500px;
-  width: 100%;
-  margin: 0 auto;
-  position: relative;
-  padding-bottom: 4rem;
-}
-
-.path-connector {
-  left: 0;
-  right: 0;
-  margin: 0 auto;
 }

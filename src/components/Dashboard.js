@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import ProgressPath from './ProgressPath';
 import LearningPath from './LearningPath';
@@ -16,6 +16,18 @@ function Dashboard({ user, onLogout }) {
     name: user?.name || userData.name,
     email: user?.email || userData.email
   };
+
+  useEffect(() => {
+    const handleTriggerSidebarOpen = () => {
+      setSidebarOpen(true);
+    };
+
+    document.addEventListener('triggerSidebarOpen', handleTriggerSidebarOpen);
+
+    return () => {
+      document.removeEventListener('triggerSidebarOpen', handleTriggerSidebarOpen);
+    };
+  }, []);
 
   return (
     <div className="dashboard">

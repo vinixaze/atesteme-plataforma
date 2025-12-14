@@ -28,7 +28,7 @@ function LearningPath({ competencesData, currentLevel }) {
           const categoryColor = getCategoryColor(competence.category);
           
           return (
-            <div key={competence.id} className="competence-wrapper">
+            <React.Fragment key={competence.id}>
               {index > 0 && (
                 <div 
                   className={`path-connector ${competence.completed ? 'completed' : ''}`}
@@ -40,63 +40,62 @@ function LearningPath({ competencesData, currentLevel }) {
                 />
               )}
               
-              <div 
-                className={`competence-node ${
-                  competence.completed ? 'completed' : 
-                  competence.current ? 'current' : 
-                  competence.locked ? 'locked' : 
-                  'available'
-                }`}
-                style={{
-                  marginLeft: index % 2 === 0 ? '10%' : '60%'
-                }}
-              >
+              <div className="competence-wrapper">
                 <div 
-                  className="competence-circle"
-                  style={{
-                    background: competence.locked 
-                      ? '#BDBDBD' 
-                      : `linear-gradient(135deg, ${categoryColor}, ${categoryColor}dd)`
-                  }}
+                  className={`competence-node ${
+                    competence.completed ? 'completed' : 
+                    competence.current ? 'current' : 
+                    competence.locked ? 'locked' : 
+                    'available'
+                  }`}
                 >
-                  {competence.completed ? (
-                    <CheckCircle className="competence-icon" />
-                  ) : competence.locked ? (
-                    <Lock className="competence-icon" size={24} />
-                  ) : (
-                    <span className="competence-number">{index + 1}</span>
-                  )}
-                </div>
-                
-                <div className="competence-content">
-                  <span 
-                    className="competence-category"
-                    style={{ color: categoryColor }}
+                  <div 
+                    className="competence-circle"
+                    style={{
+                      background: competence.locked 
+                        ? '#BDBDBD' 
+                        : `linear-gradient(135deg, ${categoryColor}, ${categoryColor}dd)`
+                    }}
                   >
-                    {competence.category}
-                  </span>
-                  <span className="competence-title">{competence.title}</span>
+                    {competence.completed ? (
+                      <CheckCircle className="competence-icon" />
+                    ) : competence.locked ? (
+                      <Lock className="competence-icon" size={28} />
+                    ) : (
+                      <span className="competence-number">{index + 1}</span>
+                    )}
+                  </div>
+                  
+                  <div className="competence-content">
+                    <span 
+                      className="competence-category"
+                      style={{ color: categoryColor }}
+                    >
+                      {competence.category}
+                    </span>
+                    <span className="competence-title">{competence.title}</span>
 
-                  {competence.completed && competence.stars && (
-                    <div className="stars">
-                      {[...Array(3)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`star ${i < competence.stars ? 'filled' : ''}`}
-                          size={14}
-                        />
-                      ))}
-                    </div>
+                    {competence.completed && competence.stars && (
+                      <div className="stars">
+                        {[...Array(3)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`star ${i < competence.stars ? 'filled' : ''}`}
+                            size={16}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {!competence.locked && !competence.completed && (
+                    <button className="start-button">
+                      {competence.current ? 'Continuar' : 'Iniciar'}
+                    </button>
                   )}
                 </div>
-
-                {!competence.locked && !competence.completed && (
-                  <button className="start-button">
-                    {competence.current ? 'Continuar' : 'Iniciar'}
-                  </button>
-                )}
               </div>
-            </div>
+            </React.Fragment>
           );
         })}
       </div>
