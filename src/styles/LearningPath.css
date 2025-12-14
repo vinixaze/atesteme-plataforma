@@ -351,3 +351,16 @@
     font-size: 1rem;
   }
 }
+path-scroll {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  padding-bottom: 4rem;
+}
+
+.path-connector {
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}

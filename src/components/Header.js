@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { User, Bell, Menu, LogOut } from 'lucide-react';
 
-function Header({ user, onLogout }) {
+function Header({ user, onLogout, onMenuClick }) {
   const [showUserMenu, setShowUserMenu] = useState(false);
 
   return (
     <header style={styles.header}>
       <div style={styles.container}>
-        <button style={styles.menuButton}>
+        {/* 2. Adicionei o evento onClick aqui no botão */}
+        <button style={styles.menuButton} onClick={onMenuClick}>
           <Menu size={24} />
         </button>
         <div style={styles.logo}>

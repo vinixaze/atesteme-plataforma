@@ -3,8 +3,8 @@ import Header from './Header';
 import ProgressPath from './ProgressPath';
 import LearningPath from './LearningPath';
 import Medals from './Medals';
-import { userData } from '../data/userData';
 import Sidebar from './Sidebar';
+import { userData } from '../data/userData';
 import '../styles/Dashboard.css';
 
 function Dashboard({ user, onLogout }) {
@@ -19,15 +19,16 @@ function Dashboard({ user, onLogout }) {
 
   return (
     <div className="dashboard">
-      <Header user={userDataWithName} 
+      <Header 
+        user={userDataWithName} 
         onLogout={onLogout}
         onMenuClick={() => setSidebarOpen(true)}
-       />
+      />
 
-       <Sidebar>
+      <Sidebar 
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
-       </Sidebar>
+      />
       
       <div className="dashboard-container">
         <div className="profile-header">
