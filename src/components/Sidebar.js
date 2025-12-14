@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { X, Home, BookOpen, Award, Trophy, FileText, HelpCircle } from 'lucide-react';
+import logoWhite from '../assets/logo-branca.png';
 import '../styles/Sidebar.css';
 
 function Sidebar({ isOpen, onClose }) {
@@ -12,44 +13,17 @@ function Sidebar({ isOpen, onClose }) {
     { icon: HelpCircle, label: 'Suporte' }
   ];
 
-  useEffect(() => {
-    let timeoutId;
-
-    const handleMouseMove = (e) => {
-      if (e.clientX <= 20 && !isOpen) {
-        timeoutId = setTimeout(() => {
-          document.dispatchEvent(new CustomEvent('openSidebar'));
-        }, 100);
-      } else if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-    };
-
-    const handleOpenSidebar = () => {
-      if (!isOpen) {
-        const openEvent = new CustomEvent('triggerSidebarOpen');
-        document.dispatchEvent(openEvent);
-      }
-    };
-
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('openSidebar', handleOpenSidebar);
-
-    return () => {
-      if (timeoutId) clearTimeout(timeoutId);
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('openSidebar', handleOpenSidebar);
-    };
-  }, [isOpen]);
-
   return (
     <>
       {isOpen && <div className="sidebar-overlay" onClick={onClose} />}
       <div className={`sidebar ${isOpen ? 'open' : ''}`}>
         <div className="sidebar-header">
           <div className="sidebar-logo">
-            <span className="logo-text">ateste</span>
-            <span className="logo-highlight">me</span>
+            <img 
+              src={logoWhite} 
+              alt="AtesteMe" 
+              style={{ height: '32px', width: 'auto' }} 
+            />
           </div>
           <button className="sidebar-close" onClick={onClose}>
             <X size={24} />

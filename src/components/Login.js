@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { authenticateUser, saveCurrentUser, DEMO_USERS } from '../utils/auth';
 import '../styles/Login.css';
+import logoWhite from '../assets/logo-branca.png';
+import logoPurple from '../assets/logo-roxa.png';
 
 function Login({ onLogin }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -31,34 +33,13 @@ function Login({ onLogin }) {
         setError('E-mail/CPF ou senha incorretos. Verifique as credenciais disponíveis abaixo.');
       }
     } else {
-      if (!formData.fullName.trim()) {
-        setError('Por favor, preencha o nome completo');
-        return;
-      }
-      if (!formData.username.trim()) {
-        setError('Por favor, preencha o nome de usuário');
-        return;
-      }
-      if (!formData.email.trim()) {
-        setError('Por favor, preencha o e-mail');
-        return;
-      }
-      if (!formData.birthDate.trim()) {
-        setError('Por favor, preencha a data de nascimento');
-        return;
-      }
-      if (!formData.cpf.trim()) {
-        setError('Por favor, preencha o CPF');
-        return;
-      }
-      if (formData.password.length < 8) {
-        setError('A senha deve ter no mínimo 8 caracteres');
-        return;
-      }
-      if (formData.password !== formData.confirmPassword) {
-        setError('As senhas não coincidem. Por favor, digite a mesma senha nos dois campos.');
-        return;
-      }
+      if (!formData.fullName.trim()) { setError('Por favor, preencha o nome completo'); return; }
+      if (!formData.username.trim()) { setError('Por favor, preencha o nome de usuário'); return; }
+      if (!formData.email.trim()) { setError('Por favor, preencha o e-mail'); return; }
+      if (!formData.birthDate.trim()) { setError('Por favor, preencha a data de nascimento'); return; }
+      if (!formData.cpf.trim()) { setError('Por favor, preencha o CPF'); return; }
+      if (formData.password.length < 8) { setError('A senha deve ter no mínimo 8 caracteres'); return; }
+      if (formData.password !== formData.confirmPassword) { setError('As senhas não coincidem.'); return; }
 
       const newUser = {
         id: Date.now(),
@@ -74,20 +55,13 @@ function Login({ onLogin }) {
   };
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
     setError('');
   };
 
   const fillDemoCredentials = (userIndex = 0) => {
     const user = DEMO_USERS[userIndex];
-    setFormData({
-      ...formData,
-      email: user.email,
-      password: user.password
-    });
+    setFormData({ ...formData, email: user.email, password: user.password });
     setError('');
   };
 
@@ -95,9 +69,9 @@ function Login({ onLogin }) {
     <div className="login-container">
       <div className="login-card">
         <div className="login-header">
-          <div className="logo">
-            <span className="logo-text">ateste</span>
-            <span className="logo-highlight">me</span>
+          <div className="logo-container">
+            <img src={logoWhite} alt="AtesteMe" className="logo-img desktop-logo" />
+            <img src={logoPurple} alt="AtesteMe" className="logo-img mobile-logo" />
           </div>
           <p className="subtitle">Plataforma de Educação Digital</p>
         </div>
@@ -115,7 +89,6 @@ function Login({ onLogin }) {
 
             <div className="demo-credentials">
               <p>Credenciais disponíveis para demonstração:</p>
-              
               {DEMO_USERS.map((user, index) => (
                 <div key={user.id} className="credentials-box">
                   <div className="credentials-info">

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { User, Bell, Menu, LogOut } from 'lucide-react';
+import logoWhite from '../assets/logo-branca.png';
 
 function Header({ user, onLogout, onMenuClick }) {
   const [showUserMenu, setShowUserMenu] = useState(false);
@@ -7,13 +8,11 @@ function Header({ user, onLogout, onMenuClick }) {
   return (
     <header style={styles.header}>
       <div style={styles.container}>
-        {/* 2. Adicionei o evento onClick aqui no botão */}
         <button style={styles.menuButton} onClick={onMenuClick}>
           <Menu size={24} />
         </button>
         <div style={styles.logo}>
-          <span style={styles.logoText}>ateste</span>
-          <span style={styles.logoHighlight}>me</span>
+          <img src={logoWhite} alt="AtesteMe" style={styles.logoImage} />
         </div>
         <div style={styles.actions}>
           <button style={styles.iconButton}>
@@ -73,16 +72,14 @@ const styles = {
     alignItems: 'center'
   },
   logo: {
-    fontSize: '1.5rem',
-    fontWeight: 'bold',
     display: 'flex',
-    gap: '0'
+    alignItems: 'center',
+    height: '40px'
   },
-  logoText: {
-    color: 'white'
-  },
-  logoHighlight: {
-    color: '#E1BEE7'
+  logoImage: {
+    height: '100%',
+    width: 'auto',
+    objectFit: 'contain'
   },
   actions: {
     display: 'flex',
@@ -133,7 +130,8 @@ const styles = {
     borderBottom: '1px solid #E0E0E0',
     display: 'flex',
     flexDirection: 'column',
-    gap: '0.25rem'
+    gap: '0.25rem',
+    color: '#333'
   },
   logoutButton: {
     width: '100%',
