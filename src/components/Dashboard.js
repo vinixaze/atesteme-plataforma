@@ -4,10 +4,12 @@ import ProgressPath from './ProgressPath';
 import LearningPath from './LearningPath';
 import Medals from './Medals';
 import { userData } from '../data/userData';
+import Sidebar from './Sidebar';
 import '../styles/Dashboard.css';
 
 function Dashboard({ user, onLogout }) {
   const [activeTab, setActiveTab] = useState('learning');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const userDataWithName = {
     ...userData,
@@ -17,7 +19,15 @@ function Dashboard({ user, onLogout }) {
 
   return (
     <div className="dashboard">
-      <Header user={userDataWithName} onLogout={onLogout} />
+      <Header user={userDataWithName} 
+        onLogout={onLogout}
+        onMenuClick={() => setSidebarOpen(true)}
+       />
+
+       <Sidebar>
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+       </Sidebar>
       
       <div className="dashboard-container">
         <div className="profile-header">
