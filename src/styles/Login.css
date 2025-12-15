@@ -93,15 +93,15 @@
 
   .login-header {
     flex: 0 0 45%;
-    background: linear-gradient(135deg, #7B1FA2, #9C27B0);
+    background: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 3rem;
     position: relative;
-    color: white;
     text-align: center;
+    border-right: 3px solid #7B1FA2;
   }
 
   .login-header::before {
@@ -111,12 +111,12 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+    background: linear-gradient(135deg, rgba(123, 31, 162, 0.03) 0%, rgba(156, 39, 176, 0.05) 100%);
     pointer-events: none;
   }
 
   .login-header .subtitle {
-    color: rgba(255, 255, 255, 0.9) !important;
+    color: #666 !important;
     font-size: 1.1rem;
     margin-top: 1rem;
   }

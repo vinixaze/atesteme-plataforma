@@ -47,13 +47,14 @@ function Header({ user, onLogout, onMenuClick }) {
 
 const styles = {
   header: {
-    background: 'linear-gradient(135deg, #7B1FA2, #9C27B0)',
-    color: 'white',
+    background: 'white',
+    color: '#333',
     padding: '1rem',
     position: 'sticky',
     top: 0,
     zIndex: 100,
-    boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+    boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+    borderBottom: '3px solid #7B1FA2'
   },
   container: {
     maxWidth: '1200px',
@@ -65,11 +66,12 @@ const styles = {
   menuButton: {
     background: 'none',
     border: 'none',
-    color: 'white',
+    color: '#7B1FA2',
     cursor: 'pointer',
     padding: '0.5rem',
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    transition: 'opacity 0.2s'
   },
   logo: {
     display: 'flex',
@@ -89,12 +91,13 @@ const styles = {
   iconButton: {
     background: 'none',
     border: 'none',
-    color: 'white',
+    color: '#7B1FA2',
     cursor: 'pointer',
     padding: '0.5rem',
     position: 'relative',
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    transition: 'opacity 0.2s'
   },
   badge: {
     position: 'absolute',
@@ -108,7 +111,8 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: 'white'
   },
   userMenuContainer: {
     position: 'relative'
