@@ -1,6 +1,6 @@
 import React from 'react';
 import { X, Home, BookOpen, Award, Trophy, FileText, HelpCircle } from 'lucide-react';
-import logoWhite from '../assets/logo-branca.png';
+import logoPurple from '../assets/logo-roxa.png';
 import '../styles/Sidebar.css';
 
 function Sidebar({ isOpen, onClose }) {
@@ -20,7 +20,7 @@ function Sidebar({ isOpen, onClose }) {
         <div className="sidebar-header">
           <div className="sidebar-logo">
             <img 
-              src={logoWhite} 
+              src={logoPurple} 
               alt="AtesteMe" 
               style={{ height: '32px', width: 'auto' }} 
             />

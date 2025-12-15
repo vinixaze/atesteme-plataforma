@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { authenticateUser, saveCurrentUser, DEMO_USERS } from '../utils/auth';
 import '../styles/Login.css';
-import logoWhite from '../assets/logo-branca.png';
 import logoPurple from '../assets/logo-roxa.png';
 
 function Login({ onLogin }) {
@@ -70,7 +69,7 @@ function Login({ onLogin }) {
       <div className="login-card">
         <div className="login-header">
           <div className="logo-container">
-            <img src={logoWhite} alt="AtesteMe" className="logo-img desktop-logo" />
+            <img src={logoPurple} alt="AtesteMe" className="logo-img desktop-logo" />
             <img src={logoPurple} alt="AtesteMe" className="logo-img mobile-logo" />
           </div>
           <p className="subtitle">Plataforma de Educação Digital</p>

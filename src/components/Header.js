@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { User, Bell, Menu, LogOut } from 'lucide-react';
-import logoWhite from '../assets/logo-branca.png';
+import logoPurple from '../assets/logo-roxa.png';
 
 function Header({ user, onLogout, onMenuClick }) {
   const [showUserMenu, setShowUserMenu] = useState(false);
@@ -12,7 +12,7 @@ function Header({ user, onLogout, onMenuClick }) {
           <Menu size={24} />
         </button>
         <div style={styles.logo}>
-          <img src={logoWhite} alt="AtesteMe" style={styles.logoImage} />
+          <img src={logoPurple} alt="AtesteMe" style={styles.logoImage} />
         </div>
         <div style={styles.actions}>
           <button style={styles.iconButton}>
